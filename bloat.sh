@@ -30,7 +30,7 @@ case $desktop in
         ;;
 esac
 # install vm video drivers
-if [[ $dekstop != "2" && arch-chroot /mnt /bin/bash -c "grep -q ^flags.*\ hypervisor\  /proc/cpuinfo" ]]
+if [[ $desktop != "2" ]] && [[ arch-chroot /mnt /bin/bash -c "grep -q ^flags.*\ hypervisor\  /proc/cpuinfo" ]]
 then
     pacstrap /mnt spice-vdagent xf86-video-qxl
 fi
