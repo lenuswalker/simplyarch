@@ -36,7 +36,7 @@ if arch-chroot /mnt /bin/bash -c "grep -q ^flags.*\ hypervisor\  /proc/cpuinfo"
 then
     if ! [[ $desktop == "2" ]]
     then
-    pacstrap /mnt spice-vdagent xf86-video-qxl
+        pacstrap /mnt spice-vdagent xf86-video-qxl
     fi
 fi
 clear
