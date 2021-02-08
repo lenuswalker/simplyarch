@@ -13,15 +13,15 @@ do
 done
 case $desktop in
     1)
-        pacstrap /mnt gnome-shell mutter chrome-gnome-shell firefox gdm gnome-backgrounds gnome-control-center gnome-screenshot gnome-system-monitor gnome-terminal gnome-tweak-tool nautilus tracker
+        pacstrap /mnt gnome-shell mutter chrome-gnome-shell gdm gnome-backgrounds gnome-control-center gnome-screenshot gnome-system-monitor gnome-terminal gnome-tweak-tool nautilus tracker
         arch-chroot /mnt /bin/bash -c "systemctl enable gdm.service"
         ;;
     2)
-        pacstrap /mnt plasma-desktop plasma-wayland-session ark dolphin firefox gwenview konsole kwrite krunner kscreen partitionmanager plasma-nm powerdevil sddm
+        pacstrap /mnt plasma-desktop plasma-wayland-session ark dolphin gwenview konsole kwrite krunner kscreen partitionmanager plasma-nm powerdevil sddm
         arch-chroot /mnt /bin/bash -c "systemctl enable sddm.service"
         ;;
     3)
-        pacstrap /mnt xfce xfce4-goodies firefox lightdm lightdm-gtk-greeter
+        pacstrap /mnt xfce xfce4-goodies lightdm lightdm-gtk-greeter
         arch-chroot /mnt /bin/bash -c "systemctl enable lightdm.service"
         ;;
     4)
@@ -29,10 +29,15 @@ case $desktop in
         exit 0
         ;;
 esac
+# install Firefox for all DE selections
+pacstrap /mnt firefox
 # install vm video drivers
-if [[ $desktop != "2" ]] && [[ arch-chroot /mnt /bin/bash -c "grep -q ^flags.*\ hypervisor\  /proc/cpuinfo" ]]
+if arch-chroot /mnt /bin/bash -c "grep -q ^flags.*\ hypervisor\  /proc/cpuinfo"
 then
+    if ! [[ $desktop == "2" ]]
+    then
     pacstrap /mnt spice-vdagent xf86-video-qxl
+    fi
 fi
 clear
 echo ">>> NVIDIA Support <<<"
