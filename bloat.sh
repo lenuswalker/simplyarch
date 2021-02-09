@@ -21,7 +21,7 @@ case $desktop in
         arch-chroot /mnt /bin/bash -c "systemctl enable sddm.service"
         ;;
     3)
-        pacstrap /mnt xfce xfce4-goodies lightdm lightdm-gtk-greeter
+        pacstrap /mnt xfce4 xfce4-goodies lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings
         arch-chroot /mnt /bin/bash -c "systemctl enable lightdm.service"
         ;;
     4)
