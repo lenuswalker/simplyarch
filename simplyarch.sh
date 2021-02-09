@@ -16,7 +16,6 @@ echo
 read -p "Do you want to continue? (Y/N): " prompt
 if [[ $prompt == "y" || $prompt == "Y" || $prompt == "yes" || $prompt == "Yes" ]]
 then
-	#timedatectl set-ntp true
 	clear
 	# Ask locales
 	echo ">>> Region & Language <<<"
@@ -24,14 +23,14 @@ then
 	echo "EXAMPLES:"
 	echo "us United States | us-acentos US Intl | latam Latin American Spanish | es Spanish"
 	read -p "Keyboard layout: " keyboard 
-	if [ -z "$keyboard" ]
+	if [[ -z "$keyboard" ]]
 	then
 		keyboard="us"
 	fi
 	echo
 	echo "EXAMPLES: en_US | es_ES (don't add .UTF-8)"
 	read -p "Locale: " locale
-	if [ -z "$locale" ]
+	if [[ -z "$locale" ]]
 	then
 		locale="en_US"
 	fi
@@ -47,7 +46,7 @@ then
 	echo
 	read -sp "Re-type password: " rootpw2
 	echo
-	while [ $rootpw != $rootpw2 ]
+	while [[ $rootpw != $rootpw2 ]]
 	do
 		echo
 		echo "Passwords don't match. Try again"
@@ -64,7 +63,7 @@ then
 	echo
 	read -sp "Re-type password: " userpw2
 	echo
-	while [ $userpw != $userpw2 ]
+	while [[ $userpw != $userpw2 ]]
 	do
 		echo
 		echo "Passwords don't match. Try again"
@@ -217,17 +216,10 @@ then
 	echo "Installing the Paru AUR Helper..."
 	echo "cd && git clone https://aur.archlinux.org/paru-bin.git && cd paru-bin && makepkg -si --noconfirm && cd && rm -rf paru-bin" | arch-chroot /mnt /bin/bash -c "su $user"
 	clear
-	# execute another script to add some bloat
-	echo ">>> Make Arch Bloated? <<<"
-	echo
-	echo "Do you want to install a Desktop Environment and other packages? (Y/N)"
-	read -p "Bloat: " bloat
-	if [[ $bloat == "y" || $bloat == "Y" || $bloat == "yes" || $bloat == "Yes" ]]
-	then
-		export user
-		/bin/bash bloat.sh
-	fi
-	clear
+	# bloat
+	chmod +x bloat.sh
+	./bloat.sh
+	# end
 	echo "SimplyArch Installer"
 	echo
 	echo ">>> Installation finished sucessfully <<<"
