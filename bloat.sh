@@ -21,10 +21,10 @@ do
 done
 case $desktop in
     1)
-        DEpkg="gdm gnome-shell gnome-backgrounds gnome-control-center gnome-screenshot gnome-system-monitor gnome-terminal gnome-tweak-tool nautilus gnome-disks"
+        DEpkg="gdm gnome-shell gnome-backgrounds gnome-control-center gnome-screenshot gnome-system-monitor gnome-terminal gnome-tweaks nautilus"
         ;;
     2)
-    	DEpkg="gdm gnome gnome-tweak-tool"
+    	DEpkg="gdm gnome gnome-tweaks"
     	;;
     3)
         DEpkg="sddm plasma plasma-wayland-session dolphin konsole kate kcalc ark gwenview spectacle okular packagekit-qt5"
@@ -86,7 +86,7 @@ echo "Do you want to add propietary NVIDIA drivers? (Y/N)"
 read -p "NVIDIA Support: " nvidia
 if [[ $nvidia == "y" || $nvidia == "Y" || $nvidia == "yes" || $nvidia == "Yes" ]]
 then
-    arch-chroot /mnt /bin/bash -c "pacman -S nvidia-dkms nvidia-utils egl-wayland --noconfirm --needed"
+    arch-chroot /mnt /bin/bash -c "pacman -S nvidia --noconfirm --needed"
 fi
 clear
 # broadcom
